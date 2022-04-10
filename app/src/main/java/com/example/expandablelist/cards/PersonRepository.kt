@@ -32,7 +32,7 @@ class PersonRepository {
                         "Voiced by: Ryō Horikawa (Toei Animation), Christopher Sabat (Funimation), Laura Bailey (Funimation)\n" +
                         "Children: Trunks, Bulla",
                 section = "Saiyan",
-                Image ="https://static1.cbrimages.com/wordpress/wp-content/uploads/2021/08/vegeta-dragon-ball-super-frown.jpg?q=50&fit=crop&w=767&h=450&dpr=1.5"
+                Image ="!https://static1.cbrimages.com/wordpress/wp-content/uploads/2021/08/vegeta-dragon-ball-super-frown.jpg?q=50&fit=crop&w=767&h=450&dpr=1.5"
             ),
             Person(
                 id = 2,

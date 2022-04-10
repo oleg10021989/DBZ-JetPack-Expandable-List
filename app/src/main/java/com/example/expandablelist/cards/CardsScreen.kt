@@ -2,6 +2,7 @@ package com.example.expandablelist.cards
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.view.Gravity
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
@@ -25,7 +26,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import coil.compose.ImagePainter
+import coil.compose.ImagePainter.State.Empty.painter
 import coil.compose.rememberImagePainter
+import coil.transform.BlurTransformation
+import coil.transform.CircleCropTransformation
+import coil.transform.GrayscaleTransformation
 import com.example.expandablelist.theme.cardCollapsedBackgroundColor
 import com.example.expandablelist.theme.cardExpandedBackgroundColor
 import com.example.expandablelist.R
@@ -151,7 +157,7 @@ fun ExpandablepersonCard(
                     degrees = arrowRotationDegree,
                     onClick = onCardArrowClick
                 )
-                PersonCardTitle(title = card.title)
+                PersonCardTitle(title = card.title,Image=card.Image)
             }
             ExpandablePersonContent(visible = expanded,body = card.body,Image=card.Image)
         }
@@ -180,14 +186,88 @@ fun PersonCardArrow(
 
 
 @Composable
-fun PersonCardTitle(title: String) {
-    Text(
-        text = title,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        textAlign = TextAlign.Center,
-    )
+fun PersonCardTitle(title: String,Image: String) {
+    /*{
+
+
+            val painter1 = rememberImagePainter(data = Image,
+                builder = {
+                    error(R.drawable.error_handling)
+
+//                    transformations(
+//
+//                        GrayscaleTransformation(),
+//                        CircleCropTransformation(),
+//                        BlurTransformation(LocalContext.current)
+//                    )
+                },
+
+                )
+            Image(
+                painter = painter1,
+                contentDescription = null,
+                modifier = Modifier.width(350.dp).height(200.dp),
+                alignment = Alignment.Center,
+
+            )
+            val printerState1 = painter1.state
+            if(printerState1 is ImagePainter.State.Loading){
+
+            CircularProgressIndicator()
+        }
+
+            Spacer(modifier = Modifier.heightIn(10.dp))
+            Text(
+                text = body,
+                textAlign = TextAlign.Start
+            )
+*/
+    Row(modifier = Modifier.padding(8.dp)){
+
+
+        Text(
+            text = title,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp).weight(8f),
+
+            textAlign = TextAlign.Center,
+        )
+
+        val painter1 = rememberImagePainter(data = Image,
+            builder = {
+                error(R.drawable.error_handling)
+
+                    transformations(
+
+
+                        CircleCropTransformation()
+                    )
+            },
+        )
+
+        Image(
+            painter = painter1,
+            contentDescription = null,
+            modifier = Modifier.width(50.dp).height(50.dp).weight(2f),
+            alignment = Alignment.CenterEnd,
+            )
+        val printerState1 = painter1.state
+        if(printerState1 is ImagePainter.State.Loading){
+
+            CircularProgressIndicator()
+        }
+
+
+
+
+
+        Spacer(modifier = Modifier.heightIn(10.dp))
+
+
+    }
+
+
 }
 
 
@@ -228,18 +308,42 @@ fun ExpandablePersonContent(
         exit = exitCollapse + exitFadeOut
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
+
+
+            val painter1 = rememberImagePainter(data = Image,
+                builder = {
+                    error(R.drawable.error_handling)
+
+//                    transformations(
+//
+//                        GrayscaleTransformation(),
+//                        CircleCropTransformation(),
+//                        BlurTransformation(LocalContext.current)
+//                    )
+                },
+
+                )
             Image(
-                painter = rememberImagePainter(Image),
+                painter = painter1,
                 contentDescription = null,
                 modifier = Modifier.width(350.dp).height(200.dp),
                 alignment = Alignment.Center,
+
             )
+            val printerState1 = painter1.state
+            if(printerState1 is ImagePainter.State.Loading){
+
+            CircularProgressIndicator()
+        }
+
             Spacer(modifier = Modifier.heightIn(10.dp))
             Text(
                 text = body,
                 textAlign = TextAlign.Start
             )
+
         }
+
     }
 }
 
